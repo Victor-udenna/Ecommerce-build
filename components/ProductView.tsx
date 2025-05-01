@@ -7,6 +7,7 @@ interface ProductViewProps {
 }
 
 const ProductsView = ({ products, categories }: ProductViewProps) => {
+  console.log('ProductsView', products, categories);
   return (
     <div className="flex flex-col w-full">
       <div>
