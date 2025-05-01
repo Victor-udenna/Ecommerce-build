@@ -7,9 +7,14 @@ import { PackageIcon, TrolleyIcon } from '@sanity/icons';
 const Header = () => {
   const { user } = useUser();
 
-  const createClerkPasskey = async () => {};
-
-  console.log(user);
+  const createClerkPasskey = async () => {
+    try {
+      const response = await user?.createPasskey();
+      console.log(response);
+    } catch (err) {
+      console.error('Error creating passkey:', err);
+    }
+  };
   return (
     <header className="flex flex-wrap justify-between items-center px-4 py-2">
       <div className="flex flex-wrap w-full justify-between items-center">
