@@ -3,7 +3,6 @@ import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { imageUrl } from '@/lib/imageUrl';
 import { PortableText } from 'next-sanity';
-import { Button } from '@/components/ui/button';
 import AddToBasketButton from '@/components/AddToBasketButton';
 
 async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {

@@ -1,4 +1,4 @@
-import useCartStore from '@/store';
+// import useCartStore from '@/store';
 
 function CartPage() {
   return <div>Basket Page</div>;
