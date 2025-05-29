@@ -4,12 +4,12 @@ import { Product } from '@/sanity.types';
 import useCartStore from '@/store';
 import { useEffect, useState } from 'react';
 
-interface AddToBasketButtonProps {
+interface AddToCartButtonProps {
   product: Product;
   disabled?: boolean;
 }
 
-function AddToBasketButton({ product, disabled }: AddToBasketButtonProps) {
+function AddToCartButton({ product, disabled }: AddToCartButtonProps) {
   const { addItem, removeItem, getItemCount } = useCartStore();
   const itemCount = getItemCount(product._id);
 
@@ -46,4 +46,4 @@ function AddToBasketButton({ product, disabled }: AddToBasketButtonProps) {
   );
 }
 
-export default AddToBasketButton;
+export default AddToCartButton;

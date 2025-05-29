@@ -5,7 +5,6 @@ import { imageUrl } from '@/lib/imageUrl';
 
 function ProductThumb({ product }: { product: Product }) {
   const isOutOfStock = product.stock != null && product.stock <= 0;
-  console.log(product.stock, isOutOfStock);
 
   return (
     <Link

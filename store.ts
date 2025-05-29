@@ -64,4 +64,4 @@ const useCartStore = create<CartStore>()(
   ),
 );
 
-export default useCartStore
+export default useCartStore;

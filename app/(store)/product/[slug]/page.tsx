@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { imageUrl } from '@/lib/imageUrl';
 import { PortableText } from 'next-sanity';
-import AddToBasketButton from '@/components/AddToBasketButton';
+import AddToCartButton from '@/components/AddToCartButton';
 
 async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -42,7 +42,7 @@ async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
             {Array.isArray(product.description) && <PortableText value={product.description} />}
           </div>
         </div>
-        <AddToBasketButton product={product} disabled={isOutOfStock} />
+        <AddToCartButton product={product} disabled={isOutOfStock}/>
       </div>
     </div>
   );
