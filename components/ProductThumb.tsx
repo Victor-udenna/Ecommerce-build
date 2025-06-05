@@ -38,9 +38,9 @@ function ProductThumb({ product }: { product: Product }) {
             .join(' ') || 'No description available'}
         </p>
         <p className="mt-2 text-lg font-bold text-gray-900">
-          {new Intl.NumberFormat('en-NG', {
+          {new Intl.NumberFormat('en-US', {
             style: 'currency',
-            currency: 'NGN',
+            currency: 'usd',
           }).format(product.price ?? 0)}
         </p>
       </div>

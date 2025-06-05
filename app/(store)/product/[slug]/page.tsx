@@ -37,12 +37,17 @@ async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
       <div className="flex flex-col justify-between gap-6">
         <div className="space-y-4">
           <h1 className="text-4xl font-bold text-gray-800">{product.name}</h1>
-          <div className="text-2xl font-semibold">&#8358;{product.price?.toFixed(2)}</div>
+          <div className="text-2xl font-semibold">
+            {new Intl.NumberFormat('en-Us', {
+              style: 'currency',
+              currency: 'usd',
+            }).format(product.price ?? 0)}
+          </div>
           <div className="prose max-w-none text-gray-700">
             {Array.isArray(product.description) && <PortableText value={product.description} />}
           </div>
         </div>
-        <AddToCartButton product={product} disabled={isOutOfStock}/>
+        <AddToCartButton product={product} disabled={isOutOfStock} />
       </div>
     </div>
   );

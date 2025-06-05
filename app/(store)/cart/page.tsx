@@ -8,13 +8,8 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { imageUrl } from '@/lib/imageUrl';
 import Loader from '@/components/Loader';
-
-export type Metadata = {
-  orderNumber: string;
-  customerName: string;
-  customerEmail: string;
-  clerckUserId: string;
-};
+import { Metadata } from '@/actions/createCheckoutSession';
+import { createCheckoutSession } from '@/actions/createCheckoutSession';
 
 function CartPage() {
   const groupedItems = useCartStore((state) => state.getGroupedItems());
@@ -41,9 +36,14 @@ function CartPage() {
       const metadata: Metadata = {
         orderNumber: crypto.randomUUID(),
         customerName: user?.fullName ?? 'Unknown',
-        customerEmail: user?.emailAddresses[0].emailAddress ?? 'Unknown',
-        clerckUserId: user!.id,
+        customerEmail: user?.emailAddresses[0]?.emailAddress ?? 'Unknown',
+        clerkUserId: user!.id,
       };
+
+      const checkoutUrl = await createCheckoutSession(groupedItems, metadata);
+      if (checkoutUrl) {
+        window.location.href = checkoutUrl;
+      }
     } catch (error) {
       console.error(error);
     } finally {
@@ -85,7 +85,7 @@ function CartPage() {
                 <div className="min-w-0">
                   <h2 className="text-lg sm:text-xl font-semibold truncate">{item.product.name}</h2>
                   <p className="text-sm sm:text-base">
-                    Price: ₦{((item.product.price ?? 0) * item.quantity).toFixed(2)}
+                    Price:  ${((item.product.price ?? 0) * item.quantity).toFixed(2)}
                   </p>
                 </div>
               </div>
@@ -107,7 +107,10 @@ order-first lg:order-last fixed bottom-0 left-0 lg:left-auto"
             </p>
             <p className="flex justify-between text-2xl font-bold border-t pt-2">
               <span>Total:</span>
-              <span>{useCartStore.getState().getTotalPrice().toFixed(2)}</span>
+              {new Intl.NumberFormat('en-Us', {
+                style: 'currency',
+                currency: 'usd',
+              }).format(useCartStore.getState().getTotalPrice() ?? 0)}
             </p>
           </div>
           {isSignedIn ? (
