@@ -82,6 +82,23 @@ export const orderType = defineType({
       ],
     }),
     defineField({
+      name: 'orderDate',
+      title: 'Order Date',
+      type: 'string',
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'status',
+      title: 'Status',
+      type: 'string',
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'stripePaymentIntentId',
+      title: 'Stripe Payment Intent ID',
+      type: 'string',
+    }),
+    defineField({
       name: 'totalPrice',
       title: 'Total Price',
       type: 'number',
@@ -104,15 +121,15 @@ export const orderType = defineType({
     select: {
       name: 'customerName',
       amount: 'totalPrice',
-      currnecy: 'currency',
+      currency: 'currency',
       orderId: 'orderNumber',
       email: 'email',
     },
     prepare(select) {
-      const orderIdSnipet = `${select.orderId.slice(0, 5)}...${select.orderId.slice(-5)}`;
+      const orderIdSnipet = `${select?.orderId?.slice(0, 5)}...${select?.orderId?.slice(-5)}`;
       return {
-        title: `${select.name} (${orderIdSnipet})`,
-        subtitle: `Total: ${select.amount} ${select.currnecy}`,
+        title: `${select?.name} (${orderIdSnipet})`,
+        subtitle: `Total: ${select?.amount} ${select?.currency}`,
         media: BasketIcon,
       };
     },
