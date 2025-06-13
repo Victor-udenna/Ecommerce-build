@@ -19,11 +19,29 @@ const Header = () => {
   };
   return (
     <header className="flex flex-wrap justify-between items-center px-4 py-2">
-      <div className="flex flex-wrap w-full justify-between items-center">
-        <Link href="/" className="text-2xl font-bold text-blue-500 hover:opacity-50 cursor-pointer mx-auto sm:0">
+      <div className="flex flex-wrap w-full justify-between">
+        <Link href="/" className="text-2xl font-bold text-blue-500 hover:opacity-50 cursor-pointer  lg:mx-auto sm:0">
           Shopr
         </Link>
-        <Form action={'/search'} className="w-full sm:w-auto sm:flex-1 sm:mx-4 mt-2 sm:mt-0">
+        <button>
+          <svg
+          className='lg:hidden'
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M21 12H9" />
+            <path d="M21 18H7" />
+            <path d="M21 6H3" />
+          </svg>
+        </button>
+        <Form action={'/search'} className="w-full hidden lg:flex sm:w-auto sm:flex-1 sm:mx-4 mt-2 sm:mt-0">
           <input
             type="text"
             name="query"
@@ -31,7 +49,7 @@ const Header = () => {
             placeholder="Search for products"
           />
         </Form>
-        <div className="flex items-center space-x-4 mt-4 sm:flex-none sm:mt-0">
+        <div className="hidden  lg:flex items-center space-x-4 mt-4 sm:flex-none sm:mt-0">
           <Link
             href={'/cart'}
             className="flex-1 relative flex justify-center sm:justify-start sm:flex-none items-center space-x-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
