@@ -25,7 +25,7 @@ export function CategorySelectorComponent({ categories }: CategorySelectorProps)
           role="combobox"
           aria-expanded={open}
           className={cn(
-            'w-full md:w-[170px] relative flex justify-center sm:justify-start sm:flex-none items-center space-x-2 bg-blue-500 hover:bg-blue-700 hover:text-white text-white font-bold py-2 px-4 rounded',
+            'w-full md:w-[170px] relative flex items-end justify-between  space-x-2 bg-black hover:bg-slate-800 hover:text-white text-white font-bold py-2 px-4 rounded',
           )}
         >
           {value ? categories.find((category) => category._id === value)?.title : 'Filter by Category'}
@@ -56,6 +56,7 @@ export function CategorySelectorComponent({ categories }: CategorySelectorProps)
               {categories.map((category) => (
                 <CommandItem
                   key={category._id}
+                  className="py-3"
                   value={category.title}
                   onSelect={() => {
                     setValue(category._id);

@@ -117,7 +117,7 @@ order-first lg:order-last fixed bottom-0 left-0 lg:left-auto"
             <button
               onClick={handleCheckout}
               disabled={isLoading}
-              className="mt-4 w-full cursor-pointer bg-blue-500 text-white py-2 rounded hover:bg-blue-600
+              className="mt-4 w-full cursor-pointer bg-black text-white py-2 rounded hover:bg-blue-600
         disabled:bg-gray-400"
             >
               {isLoading ? 'Processing...' : 'Checkout'}
@@ -125,7 +125,7 @@ order-first lg:order-last fixed bottom-0 left-0 lg:left-auto"
           ) : (
             <SignInButton mode="modal">
               <button
-                className="mt-4 w-full bg-blue-500 text-white px-4 py-2 rounded
+                className="mt-4 w-full bg-black text-white px-4 py-2 rounded
         hover:bg-blue-600"
               >
                 Sign in to Checkout

@@ -36,7 +36,7 @@ const Header = () => {
       <header className="fixed w-full top-0 left-0 right-0 bg-white z-20">
         <div className="flex flex-wrap container  w-full items-center justify-between">
           <div className="flex items-center flex-1 gap-3.5">
-            <Link href="/" className="text-2xl font-bold text-blue-500 hover:opacity-50 cursor-pointer">
+            <Link href="/" className="text-2xl font-bold text-black hover:opacity-50 cursor-pointer">
               Shopr
             </Link>
             <Form action={'/search'} className="w-full  max-w-[500px] hidden lg:flex lg:flex-grow  mt-2 sm:mt-0">
@@ -48,7 +48,6 @@ const Header = () => {
               />
             </Form>
           </div>
-
           <div className="hidden  lg:flex items-center gap-3.5  mt-4 sm:flex-none sm:mt-0">
             <Link
               href={'/cart'}
@@ -81,7 +80,7 @@ const Header = () => {
             <ClerkLoaded>
               <SignedIn>
                 <Link
-                  href={'/order'}
+                  href={'/orders'}
                   className="flex-1 relative flex justify-center sm:justify-start sm:flex-none items-center  text-black font-semibold py-2 px-2 rounded"
                 >
                   <span>Orders</span>
@@ -99,7 +98,7 @@ const Header = () => {
               {user?.passkeys?.length === 0 && (
                 <button
                   onClick={createClerkPasskey}
-                  className="bg-white hover:bg-blue-700 hover:text-white animate-pulse text-blue-500 font-bold py-2 px-4 rounded border-blue-300 border "
+                  className="bg-white hover:bg-slate-800 hover:text-white animate-pulse text-blue-500 font-bold py-2 px-4 rounded border-blue-300 border "
                 >
                   Create a Passkey now
                 </button>
@@ -234,10 +233,21 @@ const Header = () => {
             </motion.li>
             <motion.li
               variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0 } }}
-              className={` px-2.5 font-bold mb-10 ${pathname === '/order' ? 'font-bold text-black' : 'text-slate-400'}`}
+              className={` px-2.5 font-bold mb-10 ${pathname === '/orders' ? 'font-bold text-black' : 'text-slate-400'}`}
             >
-              <Link href="/order">Order</Link>
+              <Link href="/orders">Orders</Link>
             </motion.li>
+
+            {user?.passkeys?.length === 0 && (
+              <motion.li variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0 } }}>
+                <button
+                  onClick={createClerkPasskey}
+                  className="bg-white hover:bg-slate-800 hover:text-white animate-pulse text-blue-500 font-bold py-2 px-4 rounded border-blue-300 border "
+                >
+                  Create a Passkey now
+                </button>
+              </motion.li>
+            )}
           </motion.ul>
         </motion.div>
       )}

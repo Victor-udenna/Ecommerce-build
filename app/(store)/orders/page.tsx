@@ -17,19 +17,19 @@ async function Orders() {
   return (
     <>
       {orders?.length === 0 ? (
-        <div className="text-center h-screen text-gray-600 text-lg flex flex-col gap-2 items-center justify-center">
+        <div className="text-center h-screen text-lg flex flex-col gap-2 items-center justify-center">
           <Image alt="empty-order" width={250} height={250} src={emptyOrderImg} />
           <p className="text-2xl font-bold">You have not placed any orders yet.</p>
         </div>
       ) : (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 p-6">
-          <div className="w-full max-w-5xl bg-white rounded-xl shadow-lg p-6 sm:p-10">
+        <div className="flex flex-col items-center justify-center container">
+          <div className="w-full">
             <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-8">My Orders</h1>
             <div className="space-y-6">
               {orders.map((order) => (
                 <div
                   key={order?.orderNumber}
-                  className="border border-gray-200 rounded-lg shadow-sm overflow-hidden bg-white"
+                  className="border border-gray-200 rounded-lg overflow-hidden bg-white"
                 >
                   <div className="p-4 sm:p-6 border-b border-gray-100">
                     <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
@@ -87,7 +87,7 @@ async function Orders() {
                               <div className="relative h-16 w-16 rounded-md overflow-hidden flex-shrink-0">
                                 <Image
                                   src={imageUrl(product.image).url()}
-                                  alt={product?.name || 'Product'}
+                                  alt={product?.name ?? 'Product'}
                                   className="object-cover"
                                   fill
                                 />

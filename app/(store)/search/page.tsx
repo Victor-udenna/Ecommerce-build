@@ -12,8 +12,6 @@ async function SearchPage({
   const { query } = await searchParams;
   const products = await searchProductsByName(query);
 
-  console.log(query)
-
   const hasResults = products.length > 0;
 
   return (
@@ -28,7 +26,7 @@ async function SearchPage({
             placeholder="Search for products"
           />
         </Form>
-        <h1 className="text-3xl font-bold mb-6 text-center md:text-start pt-10">
+        <h1 className=" text-xl lg:text-3xl font-bold mb-6 text-center md:text-start pt-10">
           {hasResults && query !== undefined && `Search results for: ${query}`}
           {!hasResults && query !== undefined && `No products found for: ${query}`}
           {!hasResults && query === undefined && ''}

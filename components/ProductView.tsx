@@ -13,10 +13,9 @@ const ProductsView = ({ products, categories }: ProductViewProps) => {
       <div>
         <CategorySelectorComponent categories={categories} />
       </div>
-      <div className=" w-full flex-1">
+      <div className=" mt-5 w-full flex-1">
         <div>
           <ProductGrid products={products} />
-          <hr className="w-1/2 sm:w-3/4" />
         </div>
       </div>
     </div>
