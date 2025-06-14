@@ -5,8 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import useCartStore from '@/store';
-import successgif from '@/assets/gif.gif';
-import Image from 'next/image';
+
 
 function SuccessPage() {
   const searchParams = useSearchParams();
