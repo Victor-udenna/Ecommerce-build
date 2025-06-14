@@ -40,7 +40,7 @@ export default async function RootLayout({
           )}
           <main>
             <Header />
-            {children}
+            <section className="pt-22">{children}</section>
           </main>
           <SanityLive />
         </body>

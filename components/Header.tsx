@@ -2,12 +2,18 @@
 import { ClerkLoaded, SignedIn, UserButton, useUser, SignInButton } from '@clerk/nextjs';
 import Link from 'next/link';
 import Form from 'next/form';
-import { PackageIcon, TrolleyIcon } from '@sanity/icons';
 import useCartStore from '@/store';
+import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { usePathname, useRouter } from 'next/navigation';
 
 const Header = () => {
   const { user } = useUser();
+  const pathname = usePathname();
+  const router = useRouter();
   const itemCount = useCartStore((state) => state.items.reduce((total, item) => total + item.quantity, 0));
+
+  const [isMobileNav, setIsMobileNav] = useState(false);
 
   const createClerkPasskey = async () => {
     try {
@@ -17,84 +23,207 @@ const Header = () => {
       console.error('Error creating passkey:', err);
     }
   };
+
+  const openMenu = () => {
+    setIsMobileNav(!isMobileNav);
+  };
+
+  useEffect(() => {
+    setIsMobileNav(false);
+  }, [pathname]);
   return (
-    <header className="flex flex-wrap justify-between items-center px-4 py-2">
-      <div className="flex flex-wrap w-full justify-between">
-        <Link href="/" className="text-2xl font-bold text-blue-500 hover:opacity-50 cursor-pointer  lg:mx-auto sm:0">
-          Shopr
-        </Link>
-        <button>
-          <svg
-          className='lg:hidden'
-            xmlns="http://www.w3.org/2000/svg"
-            width="32"
-            height="32"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M21 12H9" />
-            <path d="M21 18H7" />
-            <path d="M21 6H3" />
-          </svg>
-        </button>
-        <Form action={'/search'} className="w-full hidden lg:flex sm:w-auto sm:flex-1 sm:mx-4 mt-2 sm:mt-0">
-          <input
-            type="text"
-            name="query"
-            className="bg-gray-100 text-gray-800 px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 border w-full max-w-4xl"
-            placeholder="Search for products"
-          />
-        </Form>
-        <div className="hidden  lg:flex items-center space-x-4 mt-4 sm:flex-none sm:mt-0">
-          <Link
-            href={'/cart'}
-            className="flex-1 relative flex justify-center sm:justify-start sm:flex-none items-center space-x-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          >
-            <TrolleyIcon className="w-6 h-6" />
-            <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
-              {itemCount}
-            </span>
-            <span>Cart</span>
-          </Link>
-          <ClerkLoaded>
-            <SignedIn>
-              <Link
-                href={'/order'}
-                className="flex-1 relative flex justify-center sm:justify-start sm:flex-none items-center space-x-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-              >
-                <PackageIcon className="w-6 h-6" />
-                <span>Orders</span>
-              </Link>
-            </SignedIn>
+    <>
+      <header className="fixed w-full top-0 left-0 right-0 bg-white z-20">
+        <div className="flex flex-wrap container  w-full items-center justify-between">
+          <div className="flex items-center flex-1 gap-3.5">
+            <Link href="/" className="text-2xl font-bold text-blue-500 hover:opacity-50 cursor-pointer">
+              Shopr
+            </Link>
+            <Form action={'/search'} className="w-full  max-w-[500px] hidden lg:flex lg:flex-grow  mt-2 sm:mt-0">
+              <input
+                type="text"
+                name="query"
+                className="bg-gray-100 text-gray-800 px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 border w-full max-w-[500px]"
+                placeholder="Search for products"
+              />
+            </Form>
+          </div>
 
-            {user ? (
-              <div className="flex items-center space-x-2">
-                <UserButton />
-                <div className="hidden sm:block text-xs">
-                  <p className="text-gray-400">Welcome Back</p>
-                  <p className="font-bold">{user?.fullName}</p>
+          <div className="hidden  lg:flex items-center gap-3.5  mt-4 sm:flex-none sm:mt-0">
+            <Link
+              href={'/cart'}
+              className="flex-1 relative flex justify-center sm:justify-start sm:flex-none items-center text-blue font-bold"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="30"
+                height="30"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#000000"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="m15 11-1 9" />
+                <path d="m19 11-4-7" />
+                <path d="M2 11h20" />
+                <path d="m3.5 11 1.6 7.4a2 2 0 0 0 2 1.6h9.8a2 2 0 0 0 2-1.6l1.7-7.4" />
+                <path d="M4.5 15.5h15" />
+                <path d="m5 11 4-7" />
+                <path d="m9 11 1 9" />
+              </svg>
+
+              <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
+                {itemCount}
+              </span>
+            </Link>
+            <ClerkLoaded>
+              <SignedIn>
+                <Link
+                  href={'/order'}
+                  className="flex-1 relative flex justify-center sm:justify-start sm:flex-none items-center  text-black font-semibold py-2 px-2 rounded"
+                >
+                  <span>Orders</span>
+                </Link>
+              </SignedIn>
+
+              {user ? (
+                <div className="flex items-center">
+                  <UserButton />
                 </div>
-              </div>
-            ) : (
-              <SignInButton mode="modal" />
-            )}
+              ) : (
+                <SignInButton mode="modal" />
+              )}
 
-            {user?.passkeys?.length === 0 && (
+              {user?.passkeys?.length === 0 && (
+                <button
+                  onClick={createClerkPasskey}
+                  className="bg-white hover:bg-blue-700 hover:text-white animate-pulse text-blue-500 font-bold py-2 px-4 rounded border-blue-300 border "
+                >
+                  Create a Passkey now
+                </button>
+              )}
+            </ClerkLoaded>
+          </div>
+
+          <ClerkLoaded>
+            <div className="flex items-center gap-3.5">
               <button
-                onClick={createClerkPasskey}
-                className="bg-white hover:bg-blue-700 hover:text-white animate-pulse text-blue-500 font-bold py-2 px-4 rounded border-blue-300 border "
+                onClick={() => {
+                  router.push('/search');
+                }}
+                className="flex items-center gap-2 relative"
               >
-                Create a Passkey now
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="28"
+                  height="28"
+                  viewBox="0 0 24 24"
+                  className="lg:hidden"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="m21 21-4.34-4.34" />
+                  <circle cx="11" cy="11" r="8" />
+                </svg>
               </button>
-            )}
+              {/* mobile sigin button */}
+              {user ? (
+                <div className="flex items-center lg:hidden">
+                  <UserButton />
+                </div>
+              ) : (
+                <div className="lg:hidden">
+                  {' '}
+                  <SignInButton mode="modal" />
+                </div>
+              )}
+              <button
+                onClick={() => {
+                  openMenu();
+                }}
+                className="flex items-center gap-2 relative"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="28"
+                  height="28"
+                  viewBox="0 0 24 24"
+                  className="lg:hidden"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M21 12H9" />
+                  <path d="M21 18H7" />
+                  <path d="M21 6H3" />
+                </svg>
+                {!isMobileNav && (
+                  <span className="lg:hidden absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
+                    {itemCount}
+                  </span>
+                )}
+              </button>
+            </div>
           </ClerkLoaded>
         </div>
-      </div>
-    </header>
+      </header>
+      {isMobileNav && (
+        <motion.div
+          initial={{ x: '-100%', opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          exit={{ x: '-100%', opacity: 0 }}
+          transition={{ duration: 0.4, ease: 'easeInOut' }}
+          className="bg-white h-screen p-5 z-10 fixed top-[70px] bottom-0 lg:hidden left-0 right-0"
+        >
+          <motion.ul
+            initial="hidden"
+            animate="visible"
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: {
+                opacity: 1,
+                y: 0,
+                transition: {
+                  staggerChildren: 0.1,
+                },
+              },
+            }}
+            className="flex-col justify-between h-full text-2xl list-none"
+          >
+            <motion.li
+              variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0 } }}
+              className={` px-2.5 font-bold mb-10 ${pathname === '/' ? 'font-bold text-black' : 'text-slate-400'}`}
+            >
+              <Link href="/">Home</Link>
+            </motion.li>
+            <motion.li
+              variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0 } }}
+              className={` px-2.5 font-bold mb-10 ${pathname === '/cart' ? 'font-bold text-black' : 'text-slate-400'}`}
+            >
+              <Link className="relative" href="/cart">
+                Cart
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
+                  {itemCount}
+                </span>
+              </Link>
+            </motion.li>
+            <motion.li
+              variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0 } }}
+              className={` px-2.5 font-bold mb-10 ${pathname === '/order' ? 'font-bold text-black' : 'text-slate-400'}`}
+            >
+              <Link href="/order">Order</Link>
+            </motion.li>
+          </motion.ul>
+        </motion.div>
+      )}
+    </>
   );
 };
 
