@@ -108,7 +108,7 @@ const Header = () => {
           </div>
 
           <ClerkLoaded>
-            <div className="flex items-center gap-3.5">
+            <div className="flex items-center gap-5">
               <button
                 onClick={() => {
                   router.push('/search');
@@ -202,6 +202,12 @@ const Header = () => {
               className={` px-2.5 font-bold mb-10 ${pathname === '/' ? 'font-bold text-black' : 'text-slate-400'}`}
             >
               <Link href="/">Home</Link>
+            </motion.li>
+            <motion.li
+              variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0 } }}
+              className={` px-2.5 font-bold mb-10 ${pathname.includes('/search') ? 'font-bold text-black' : 'text-slate-400'}`}
+            >
+              <Link href="/search">Search</Link>
             </motion.li>
             <motion.li
               variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0 } }}
