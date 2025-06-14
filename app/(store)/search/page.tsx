@@ -19,11 +19,11 @@ async function SearchPage({
   return (
     <div className="">
       <div className="h-full w-full container">
-        <Form action={'/search'} className="w-full max-w-[500px] lg:hidden flex flex-grow  mt-2 sm:mt-0">
+        <Form action={'/search'} className="w-full max-w-[500px] lg:hidden flex flex-grow sm:mt-0">
           <input
             type="text"
             name="query"
-            className="bg-gray-100 text-gray-800 px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 border w-full max-w-[500px]"
+            className="bg-gray-100 text-gray-800 h-14 px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 border w-full max-w-[500px]"
             placeholder="Search for products"
           />
         </Form>

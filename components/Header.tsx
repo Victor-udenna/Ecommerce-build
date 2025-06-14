@@ -108,28 +108,39 @@ const Header = () => {
           </div>
 
           <ClerkLoaded>
-            <div className="flex items-center gap-5">
+            <div className="flex items-center gap-7">
               <button
                 onClick={() => {
                   router.push('/search');
                 }}
                 className="flex items-center gap-2 relative"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="28"
-                  height="28"
-                  viewBox="0 0 24 24"
-                  className="lg:hidden"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="m21 21-4.34-4.34" />
-                  <circle cx="11" cy="11" r="8" />
-                </svg>
+                {pathname.includes('/search') ? (
+                  <svg fill="none" height="32" viewBox="0 0 16 16" width="32" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      clipRule="evenodd"
+                      d="m12.0153 11.0728 2.8548 2.8541-.9432.9431-2.8541-2.8548c-1.0619.8514-2.38284 1.3144-3.7439 1.3125-3.31135 0-5.99882-2.6875-5.99882-5.99886 0-3.31135 2.68747-5.99882 5.99882-5.99882 3.3113 0 5.9988 2.68747 5.9988 5.99882.002 1.36106-.4611 2.68196-1.3124 3.74396zm-1.3371-.4946c.8459-.86991 1.3184-2.03598 1.3164-3.24936 0-2.57816-2.08821-4.66575-4.6657-4.66575-2.57816 0-4.66575 2.08759-4.66575 4.66575 0 2.57749 2.08759 4.66576 4.66575 4.66576 1.21338.0019 2.37945-.4705 3.2494-1.3164zm-3.3493.0833c1.84058 0 3.3327-1.49208 3.3327-3.33266 0-1.84059-1.49212-3.33268-3.3327-3.33268-1.84059 0-3.33268 1.49209-3.33268 3.33268 0 1.84058 1.49209 3.33266 3.33268 3.33266z"
+                      fill="#001018"
+                      fillRule="evenodd"
+                    />
+                  </svg>
+                ) : (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="32"
+                    height="32"
+                    viewBox="0 0 24 24"
+                    className="lg:hidden"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="m21 21-4.34-4.34" />
+                    <circle cx="11" cy="11" r="8" />
+                  </svg>
+                )}
               </button>
               {/* mobile sigin button */}
               {user ? (
@@ -150,8 +161,8 @@ const Header = () => {
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width="28"
-                  height="28"
+                  width="32"
+                  height="32"
                   viewBox="0 0 24 24"
                   className="lg:hidden"
                   fill="none"
@@ -202,12 +213,6 @@ const Header = () => {
               className={` px-2.5 font-bold mb-10 ${pathname === '/' ? 'font-bold text-black' : 'text-slate-400'}`}
             >
               <Link href="/">Home</Link>
-            </motion.li>
-            <motion.li
-              variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0 } }}
-              className={` px-2.5 font-bold mb-10 ${pathname.includes('/search') ? 'font-bold text-black' : 'text-slate-400'}`}
-            >
-              <Link href="/search">Search</Link>
             </motion.li>
             <motion.li
               variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0 } }}
