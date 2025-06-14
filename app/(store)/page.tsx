@@ -3,7 +3,7 @@ import { getAllCategories } from '@/sanity/lib/products/getAllCategories';
 import ProductsView from '@/components/ProductView';
 import BlackFridayBanner from '@/components/BlackFridayBanner';
 
-export const dynamic = 'force-static'; 
+export const dynamic = 'force-static';
 export const revalidate = 60;
 
 export default async function Home() {
@@ -11,9 +11,9 @@ export default async function Home() {
   const categories = await getAllCategories();
 
   return (
-    <div>
+    <div className="container">
       <BlackFridayBanner />
-      <div className="flex flex-col items-center justify-top min-h-screen bg-gray-100 p-4">
+      <div className="flex flex-col  pt-10 items-center justify-top min-h-screen">
         <ProductsView products={products} categories={categories} />
       </div>
     </div>
