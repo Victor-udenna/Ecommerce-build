@@ -58,10 +58,9 @@ async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
             <div className="prose prose-neutral max-w-none text-gray-700">
               {Array.isArray(product.description) && <PortableText value={product.description} />}
             </div>
-          </div>
-
-          <div className="mt-10">
-            <AddToCartButton product={product} disabled={isOutOfStock} />
+            <div className="mt-10">
+              <AddToCartButton product={product} disabled={isOutOfStock} />
+            </div>
           </div>
         </div>
       </div>

@@ -33,7 +33,14 @@ function ProductThumb({ product }: { product: Product }) {
         <h2 className="text-lg font-semibold text-gray-800 truncate">{product?.name}</h2>
         <p className="mt-2 text-sm text-gray-600 line-clamp-2">
           {product?.description
-            ?.map((block) => (block._type === 'block' ? block.children?.map((child) => child?.text).join('') : ''))
+            ?.map((block) =>
+              block._type === 'block'
+                ? block.children
+                    ?.map((child) => child?.text)
+                    .join('')
+                    .toLocaleLowerCase()
+                : '',
+            )
             .join(' ') ?? 'No description available'}
         </p>
         <p className="mt-2 text-lg font-bold text-gray-900">

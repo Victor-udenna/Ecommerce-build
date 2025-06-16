@@ -6,7 +6,6 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import useCartStore from '@/store';
 
-
 function SuccessPage() {
   const searchParams = useSearchParams();
   const orderNumber = searchParams.get('orderNumber');
