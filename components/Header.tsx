@@ -216,12 +216,6 @@ const Header = () => {
           >
             <motion.li
               variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0 } }}
-              className={` px-2.5 font-bold mb-10 ${pathname === '/' ? 'font-bold text-black' : 'text-slate-400'}`}
-            >
-              <Link href="/">Home</Link>
-            </motion.li>
-            <motion.li
-              variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0 } }}
               className={` px-2.5 font-bold mb-10 ${pathname === '/cart' ? 'font-bold text-black' : 'text-slate-400'}`}
             >
               <Link className="relative" href="/cart">
