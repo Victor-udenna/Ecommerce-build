@@ -34,7 +34,7 @@ export async function createCheckoutSession(items: GroupedCartItem[], metadata: 
     }
     const baseUrl =
       process.env.NODE_ENV === 'production'
-        ? `https://${process.env.VERCEL_URL}`
+        ? `https://ecommerce-build-two.vercel.app/`
         : `${process.env.NEXT_PUBLIC_BASE_URL}`;
 
     const successUrl = `${baseUrl}/success?session_id={CHECKOUT_SESSION_ID}&orderNumber=${metadata.orderNumber}`;

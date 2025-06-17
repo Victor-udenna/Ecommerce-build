@@ -18,7 +18,6 @@ async function Orders() {
     <>
       {orders?.length === 0 ? (
         <div className="text-center h-screen text-lg flex flex-col gap-2 items-center justify-center">
-          <Image alt="empty-order" width={250} height={250} src={emptyOrderImg} />
           <p className="text-2xl font-bold">You have not placed any orders yet.</p>
         </div>
       ) : (
