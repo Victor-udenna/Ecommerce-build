@@ -4,7 +4,6 @@ import { redirect } from 'next/navigation';
 import { formatCurrency } from '@/lib/formatCurrency';
 import Image from 'next/image';
 import { imageUrl } from '@/lib/imageUrl';
-import emptyOrderImg from '@/assets/empty-box.png';
 
 async function Orders() {
   const { userId } = await auth();
