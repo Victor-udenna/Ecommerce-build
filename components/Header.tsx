@@ -37,7 +37,7 @@ const Header = () => {
         <div className="flex flex-wrap container  w-full items-center justify-between">
           <div className="flex items-center flex-1 gap-3.5">
             <Link href="/" className="text-2xl font-bold text-black hover:opacity-50 cursor-pointer">
-              Shopr
+              Ecomm
             </Link>
             <Form action={'/search'} className="w-full  max-w-[500px] hidden lg:flex lg:flex-grow  mt-2 sm:mt-0">
               <input
